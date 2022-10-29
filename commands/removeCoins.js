@@ -7,19 +7,19 @@ const dbFunctions = require('../handlers/db/functions');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('addcoins')
+    .setName('removecoins')
+    .setDescription('Remove coins from a user!')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-    .setDescription('Add coins to a user!')
     .addUserOption((option) =>
       option
         .setName('user')
-        .setDescription('The user to add coins to')
+        .setDescription('The user to remove coins from')
         .setRequired(true)
     )
     .addIntegerOption((option) =>
       option
         .setName('amount')
-        .setDescription('The amount of coins to add')
+        .setDescription('The amount of coins to remove')
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -32,24 +32,32 @@ module.exports = {
     if (dbUser) {
       await functions.updateUser({
         _id: user.id,
-        balance: dbUser?.balance ? dbUser.balance + amount : amount,
+        balance: dbUser?.balance
+          ? dbUser.balance - amount >= 0
+            ? dbUser.balance - amount
+            : 0
+          : 0,
         name: user.username,
       });
       embed
-        .setTitle('Add Coins')
+        .setTitle('Remove Coins')
         .setDescription(
           `${user} now has ${
-            dbUser?.balance ? dbUser.balance + amount : amount
+            dbUser?.balance
+              ? dbUser.balance - amount >= 0
+                ? dbUser.balance - amount
+                : 0
+              : 0
           } coins!`
         )
         .setColor('Green')
         .setTimestamp();
     } else {
-      dbUser = await functions.createUser({
-        _id: user.id,
-        name: user.username,
-      });
-      embed.setTitle('Add Coins').setDescription(`${user} now has no coins!`);
+      embed
+        .setTitle('Remove Coins')
+        .setDescription(`${user} has no coins!`)
+        .setColor('Green')
+        .setTimestamp();
     }
 
     await interaction.reply({ embeds: [embed], ephemeral: true });

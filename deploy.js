@@ -22,7 +22,7 @@ module.exports = async function registerApplicationCommands() {
     commands.set(command.data.name, command);
   }
   try {
-    Log('Started refreshing application (/) commands.', 0, 'Load Commands');
+    Log('Started refreshing application (/) commands.', 1, 'Load Commands');
 
     if (process.env.GUILD_ID) {
       await rest.put(
@@ -38,7 +38,7 @@ module.exports = async function registerApplicationCommands() {
       });
     }
 
-    Log('Successfully reloaded application (/) commands.', 0, 'Load Commands');
+    Log('Successfully reloaded application (/) commands.', 3, 'Load Commands');
   } catch (error) {
     console.error(error);
   }

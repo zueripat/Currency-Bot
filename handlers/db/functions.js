@@ -9,7 +9,7 @@ module.exports = class DatabaseFunctions {
   constructor() {}
 
   init() {
-    Log('Initializing Database...', 0, 'Database');
+    Log('Initializing Database...', 1, 'Database');
     mongoose.connect(process.env.DB_URI).then(() => {
       this.dbClient = mongoose.connection.useDb('Discord');
       Log('Database initialized', 3, 'Database');

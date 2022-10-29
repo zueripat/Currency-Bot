@@ -13,8 +13,5 @@ module.exports = function log(message, type, event) {
       break;
     case 3 /* start (green) */:
       console.log('\x1b[32m%s\x1b[0m', log);
-    default:
-      console.log(log);
-      break;
   }
 };
