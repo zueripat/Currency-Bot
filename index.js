@@ -3,7 +3,7 @@ const { join } = require('path');
 const { readdirSync } = require('fs');
 require('dotenv').config();
 
-const { GuildMember, User } = Partials;
+const { GuildMember, User, Message } = Partials;
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
