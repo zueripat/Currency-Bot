@@ -1,29 +1,13 @@
-const { Client, Partials } = require('discord.js');
+const { Client, Partials, GatewayIntentBits } = require('discord.js');
 const { join } = require('path');
 const { readdirSync } = require('fs');
 require('dotenv').config();
 
-const {
-  Channel,
-  GuildMember,
-  GuildScheduledEvent,
-  User,
-  Reaction,
-  Message,
-  ThreadMember,
-} = Partials;
+const { GuildMember, User } = Partials;
 
 const client = new Client({
-  intents: 131071,
-  partials: [
-    Channel,
-    GuildMember,
-    GuildScheduledEvent,
-    User,
-    Reaction,
-    Message,
-    ThreadMember,
-  ],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
+  partials: [GuildMember, User, Message],
   allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
   rest: { timeout: 1000 },
 });

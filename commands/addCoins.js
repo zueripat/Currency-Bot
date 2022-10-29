@@ -32,7 +32,7 @@ module.exports = {
 
     await functions.updateUser({
       _id: user.id,
-      balance: dbUser.balance + amount,
+      balance: dbUser?.balance ? dbUser.balance + amount : amount,
       name: user.username,
     });
 
