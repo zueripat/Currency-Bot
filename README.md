@@ -17,9 +17,13 @@ This is a low Level Bot, which supplies a Coin System. If any Issues arise feel 
 2. Create a new Organisation
 3. Create a new Project inside this Organisation
 4. Inside your Project create a Database and configure your Database and Network Access
+
 ![image](https://user-images.githubusercontent.com/66902977/198841495-2e440d54-2362-450a-ac07-87bb741670cf.png)
+
 5. Go to `Connect -> Connect your Application` and Copy the Connection String for `Node.js`
+
 ![image](https://user-images.githubusercontent.com/66902977/198841511-79f69ede-9e24-4b9d-af3a-4db7414d1dc2.png)
+
 6. Add the String with your Password to the `.env` File
 
 ## `.env` File
