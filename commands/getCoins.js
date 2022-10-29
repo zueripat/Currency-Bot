@@ -16,7 +16,7 @@ module.exports = {
     const user = interaction.options.getUser('user');
 
     let dbUser = await functions.getUser({ _id: user.id });
-    if (!dbUser) {
+    if (!dbUser && !user.bot) {
       dbUser = await functions.createUser({
         _id: user.id,
         name: user.username,
@@ -25,10 +25,12 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle('Get Coins')
-      .setDescription(`${user} has ${dbUser.balance} coins!`)
-      .setColor('#00FF00')
+      .setDescription(
+        `${user} has ${dbUser?.balance ? dbUser.balance : 0} coins!`
+      )
+      .setColor('Green')
       .setTimestamp();
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed], ephemeral: true });
   },
 };

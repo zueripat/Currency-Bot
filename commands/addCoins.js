@@ -38,10 +38,14 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle('Add Coins')
-      .setDescription(`${user} now has ${dbUser.balance + amount} coins!`)
-      .setColor('#00FF00')
+      .setDescription(
+        `${user} now has ${
+          dbUser?.balance ? dbUser.balance + amount : amount
+        } coins!`
+      )
+      .setColor('Green')
       .setTimestamp();
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed], ephemeral: true });
   },
 };

@@ -15,7 +15,7 @@ module.exports = {
     const { user, ws } = client;
     await deploy();
     new dbFunctions().init();
-    Log(`Logged in as ${user?.tag}`, 0, 'Ready');
+    Log(`Logged in as ${user?.tag}`, 3, 'Ready');
 
     setInterval(() => {
       const ping = ws.ping;

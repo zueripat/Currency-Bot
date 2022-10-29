@@ -39,9 +39,9 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTitle('Set Coins')
       .setDescription(`${user} now has ${amount} coins!`)
-      .setColor('#00FF00')
+      .setColor('Green')
       .setTimestamp();
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed], enphemeral: true });
   },
 };
