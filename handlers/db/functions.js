@@ -26,7 +26,7 @@ module.exports = class DatabaseFunctions {
 
   init() {
     Log('Initializing Database...', 0, 'Database');
-    mongoose.connect(uri).then(() => {
+    mongoose.connect(process.env.DB_URI).then(() => {
       this.dbClient = mongoose.connection.useDb('Discord');
       Log('Database initialized', 0, 'Database');
     });
