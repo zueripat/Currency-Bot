@@ -14,7 +14,7 @@ module.exports = {
   async execute(client) {
     const { user, ws } = client;
     await deploy();
-    await new dbFunctions(client).init();
+    new dbFunctions().init();
     Log(`Logged in as ${user?.tag}`, 0, 'Ready');
 
     setInterval(() => {

@@ -18,19 +18,22 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const functions = new dbFunctions(interaction.client);
+    const functions = new dbFunctions();
     const user = interaction.options.getUser('user');
     const amount = interaction.options.getInteger('amount');
 
-    let dbUser = await functions.getUser(user.id);
+    let dbUser = await functions.getUser({ _id: user.id });
     if (!dbUser) {
-      dbUser = await functions.createUser(user.id, user.username);
+      dbUser = await functions.createUser({
+        _id: user.id,
+        name: user.username,
+      });
     }
 
     await functions.updateUser({
-      id: user.id,
+      _id: user.id,
       balance: amount,
-      username: user.username,
+      name: user.username,
     });
 
     const embed = new EmbedBuilder()

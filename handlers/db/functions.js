@@ -1,61 +1,66 @@
-const knex = require('knex');
+const mongoose = require('mongoose');
 const Log = require('../Log');
+require('dotenv').config();
 
 module.exports = class DatabaseFunctions {
-  client;
   dbClient;
+  userModel;
 
-  constructor(discordClient) {
-    this.client = discordClient;
-    this.dbClient = knex({
-      client: 'mysql',
-      connection: {
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: process.env.DB_NAME,
-      },
+  constructor() {
+    this.userModel = mongoose.model(
+      'Discord',
+      new mongoose.Schema(
+        {
+          _id: String,
+          name: String,
+          balance: Number,
+        },
+        {
+          versionKey: false,
+          collection: 'Users',
+          timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+        }
+      )
+    );
+  }
+
+  init() {
+    Log('Initializing Database...', 0, 'Database');
+    mongoose.connect(uri).then(() => {
+      this.dbClient = mongoose.connection.useDb('Discord');
+      Log('Database initialized', 0, 'Database');
     });
   }
 
-  async init() {
-    Log('Database initialized', 0, 'Database');
-
-    this.dbClient.schema.hasTable('users').then(async (exists) => {
-      if (!exists) {
-        await this.dbClient.schema.createTable('users', (table) => {
-          table.string('id').primary();
-          table.string('username');
-          table.integer('balance');
-        });
-
-        Log('Created users table', 0, 'Database');
-      }
-    });
-  }
-
-  async getUser(id) {
-    const user = await this.dbClient('users').where('id', id).first();
+  async getUser({ _id }) {
+    const user = await this.userModel.findById(_id);
     return user;
   }
 
-  async createUser(id, username) {
-    await this.dbClient('users').insert({
-      id,
-      username,
-      balance: 0,
+  async createUser({ _id, name, balance = 0 }) {
+    const user = new this.userModel({
+      _id: _id,
+      name: name,
+      balance: balance,
+    });
+
+    // check if user already exists
+    const exists = await this.userModel.findById(_id);
+    if (!exists) await user.save();
+  }
+
+  async updateUser({ _id, name, balance }) {
+    await this.userModel.findByIdAndUpdate(_id, {
+      name: name,
+      balance: balance,
     });
   }
 
-  async updateUser({ id, username, balance }) {
-    await this.dbClient('users').where('id', id).update({
-      username,
-      balance,
-    });
+  async deleteUser({ _id }) {
+    await this.userModel.findByIdAndDelete(_id);
   }
 
-  async deleteUser(id) {
-    await this.dbClient('users').where('id', id).del();
+  async close() {
+    await this.dbClient.close();
   }
 };
