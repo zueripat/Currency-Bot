@@ -1,10 +1,15 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  PermissionFlagsBits,
+} = require('discord.js');
 const dbFunctions = require('../handlers/db/functions');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('getcoins')
     .setDescription('Get coins!')
+    .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
     .addUserOption((option) =>
       option
         .setName('user')
