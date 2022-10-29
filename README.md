@@ -12,15 +12,5 @@ This is a low Level Bot, which supplies a Coin System. If any Issues arise feel 
 6. Open the folder in your IDE and run `npm install` to install all the dependencies
 7. Run `npm run start` to start the bot
 
-## MySQL Setup
-
-1. Download [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
-2. Download [Docker](https://www.docker.com/products/docker-desktop)
-3. Open your Terminal and run following Commands:
-   1. `docker run -p 3306:3306 -p 33060:33060 --name=mysql57 -d mysql/mysql-server:5.7`
-   2. `docker exec -it mysql57 mysql -uroot -p`
-   3. `ALTER USER 'root'@'localhost' IDENTIFIED BY 'NEW_USER_PASSWORD';`
-   4. `UPDATE mysql.user SET host = '%' WHERE user = 'root';`
-4. Finish the Discord Setup
-5. Open the `.env` file and fill in the MySQL credentials
-6. Run `npm run start` to start the bot
+## Mongo DB
+...
