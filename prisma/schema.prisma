@@ -3,14 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 model Guild {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   gid       String   @unique
   prefix    String   @default("!")
+  minXp     Int      @default(10)
+  maxXp     Int      @default(20)
+  minVXp    Int      @default(10)
+  maxVXp    Int      @default(20)
+  status    Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   User      User[]
@@ -18,7 +23,7 @@ model Guild {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   uid       String   @unique
   gid       String
   xp        Int      @default(0)
@@ -29,7 +34,7 @@ model User {
 }
 
 model Role {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   rid       String   @unique
   gid       String
   price     Int

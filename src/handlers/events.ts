@@ -1,7 +1,7 @@
 import { join } from "path";
 import { readdirSync } from "fs";
 import { Client } from "@discordjs/core";
-import { AnyEvent } from "../../types";
+import { AnyEvent } from "../../types/events";
 
 export async function registerEvents(client: Client) {
   const eventFiles = readdirSync(join(__dirname, "../events")).filter((file) =>

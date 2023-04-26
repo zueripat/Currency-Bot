@@ -1,7 +1,7 @@
 import { join } from "path";
 import { readdirSync } from "fs";
 import { Client, GatewayDispatchEvents } from "@discordjs/core";
-import { AnyCommand, AnyCommandJson } from "../../types";
+import { AnyCommand, AnyCommandJson } from "../../types/commands";
 
 export async function registerCommands(client: Client) {
   const commandFiles = readdirSync(join(__dirname, "../commands")).filter(

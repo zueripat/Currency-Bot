@@ -1,44 +1,26 @@
 {
     "compilerOptions": {
-        // Type Checking
-        "allowUnreachableCode": false,
-        "allowUnusedLabels": false,
-        "exactOptionalPropertyTypes": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitOverride": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "target": "ESNext",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "allowJs": true,
+        "checkJs": true,
+        "skipLibCheck": true,
         "strict": true,
-        "useUnknownInCatchVariables": true,
-        "noUncheckedIndexedAccess": true,
-        // Modules
-        "module": "CommonJS",
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "commonjs",
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        // Emit
-        "declaration": true,
-        "declarationMap": true,
-        "importHelpers": true,
-        "inlineSources": true,
-        "newLine": "lf",
-        "noEmitHelpers": true,
-        "outDir": "dist",
-        "removeComments": false,
-        "sourceMap": true,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        // Language and Environment
-        "experimentalDecorators": true,
-        "lib": [
-            "ESNext"
-        ],
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "typeRoots": ["./node_modules/@types", "./types/**/*"],
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "noUncheckedIndexedAccess": true,
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./src/*"]
+        }
     },
-    "include": [
-        "src/**/*",
-        "types/**/*"
-    ],
+    "include": ["src"],
+    "exclude": ["node_modules", "build", "scripts"]
 }
