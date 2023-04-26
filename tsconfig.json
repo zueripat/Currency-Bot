@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        // Type Checking
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "strict": true,
+        "useUnknownInCatchVariables": true,
+        "noUncheckedIndexedAccess": true,
+        // Modules
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        // Emit
+        "declaration": true,
+        "declarationMap": true,
+        "importHelpers": true,
+        "inlineSources": true,
+        "newLine": "lf",
+        "noEmitHelpers": true,
+        "outDir": "dist",
+        "removeComments": false,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        // Language and Environment
+        "experimentalDecorators": true,
+        "lib": [
+            "ESNext"
+        ],
+        "target": "ESNext",
+        "useDefineForClassFields": true,
+        "typeRoots": ["./node_modules/@types", "./types/**/*"],
+    },
+    "include": [
+        "src/**/*",
+        "types/**/*"
+    ],
+}
